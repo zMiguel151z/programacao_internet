@@ -1,8 +1,6 @@
 <?php
-require_once __DIR__ . "/app/controller/LoginController.php";
+require_once __DIR__ . "/app/controller/UserController.php";
 
-$controller = new LoginController();
-$controller->exigirLogin();
+$controller = new UserController();
 
-header("Location: /app/view/painel.php");
-exit;
+

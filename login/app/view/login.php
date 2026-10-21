@@ -1,28 +1,9 @@
 <?php
-require_once __DIR__ . "/../controller/LoginController.php";
+require_once __DIR__ . "/../controller/UserController.php";
 
-$controller = new LoginController();
+$controller = new UserController();
 
-if ($controller->estaLogado()) {
-    header("Location: painel.php");
-    exit;
-}
 
-$erro = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = trim($_POST["email"] ?? "");
-    $senha = $_POST["senha"] ?? "";
-
-    if ($email === "" || $senha === "") {
-        $erro = "Preencha o email e a senha.";
-    } elseif ($controller->login($email, $senha)) {
-        header("Location: painel.php");
-        exit;
-    } else {
-        $erro = "Email ou senha inválidos.";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <h1>Entrar</h1>
 
-    <?php if ($erro !== ""): ?>
+    <?php if ($erro !=  ""): ?>
         <p><?= htmlspecialchars($erro) ?></p>
     <?php endif; ?>
 
