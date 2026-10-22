@@ -1,37 +1,34 @@
-<?php
-require_once __DIR__ . "/../controller/UserController.php";
-
-$controller = new UserController();
-
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login MVC</title>
 </head>
 <body>
-    <h1>Entrar</h1>
 
-    <?php if ($erro !=  ""): ?>
-        <p><?= htmlspecialchars($erro) ?></p>
+    <h1>Acesse sua conta</h1>
+
+    <?php if(isset($erro)): ?>
+        <p style="color: red;">
+            <?php echo htmlspecialchars($erro); ?>
+        </p>
     <?php endif; ?>
 
-    <form method="post" action="login.php">
+    <form action="index.php?action=autenticar" method="POST">
         <p>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <label>E-mail</label>
+            <input type="email" name="email">
         </p>
+
         <p>
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+            <label>Senha</label>
+            <input type="password" name="senha">
         </p>
+
         <p>
             <button type="submit">Entrar</button>
         </p>
     </form>
 
-    <p><a href="cadastro.php">Criar conta</a></p>
 </body>
 </html>
