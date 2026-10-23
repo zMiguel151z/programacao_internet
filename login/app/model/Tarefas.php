@@ -25,25 +25,37 @@
     public function criar(string $descricao, int $user_id){
         $descricao = $this->conn->real_escape_string($descricao);
         $user_id = intval($user_id);
-        $sql = "INSERT INTO tarefas (descricao,usuario_id) VALUES ('$descricao','$user_id')";
-        return $this->conn->query($sql);
+        $sql = "INSERT INTO tarefas (descricao,usuario_id) VALUES (?,?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("si",$descricao,$user_id);
+        $resultado =  $stmt->execute();
+        $stmt->close();
+        return $resultado;
+        
         
     }
 
     #excluir 
     public function deletar(int $id){
         $id = intval($id);
-        $sql = "DELETE FROM tarefas WHERE id = '$id' ";
-        return $this->conn->query($sql);
+        $sql = "DELETE FROM tarefas WHERE id = ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i",$id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        return $resultado;
     }
     
     #atualizar
     public function atualizar(string $descricao, int $id){
         $descricao = $this->conn->real_escape_string($descricao);
         $id = intval($id);
-        $sql = "UPDATE tarefas SET descricao = '$descricao' WHERE id = '$id' ";
-
-        return $this->conn->query($sql);
+        $sql = "UPDATE tarefas SET descricao = ? WHERE id = ? ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("si",$descricao,$id);
+        $resultado = $stmt->execute();
+        $stmt->close();
+        return $resultado;
     }
 
  }
