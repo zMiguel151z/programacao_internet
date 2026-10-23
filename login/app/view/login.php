@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Login MVC</title>
+
+    <link rel="stylesheet" href="/app/view/style/loginStyle.css">
 </head>
 <body>
+<div>
 
     <h1>Acesse sua conta</h1>
 
@@ -15,12 +18,12 @@
     <?php endif; ?>
 
     <form action="index.php?action=autenticar" method="POST">
-        <p>
+        <p class="input">
             <label>E-mail</label>
             <input type="email" name="email">
         </p>
 
-        <p>
+        <p class="input">
             <label>Senha</label>
             <input type="password" name="senha">
         </p>
@@ -30,5 +33,6 @@
         </p>
     </form>
 
+</div>
 </body>
 </html>
