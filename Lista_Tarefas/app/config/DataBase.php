@@ -3,7 +3,7 @@
 
 class DataBase{
 
-   private $host = "localhost";
+   private $host = "127.0.0.1";
    private $user = "root";
    private $senha = "";
    private $banco = "todo_list";

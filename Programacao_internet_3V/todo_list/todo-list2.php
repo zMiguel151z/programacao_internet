@@ -2,7 +2,7 @@
 
 # Conexão com o banco
 
-$localhost = "localhost"; 
+$localhost = "127.0.0.1"; 
 $banco = "todo_list"; 
 $usuario = "root"; 
 $senha = ""; 

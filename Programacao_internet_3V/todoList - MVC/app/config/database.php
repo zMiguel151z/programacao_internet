@@ -1,7 +1,7 @@
 <?php 
 
 class Database {
-    private $host = 'localhost'; 
+    private $host = '127.0.0.1'; 
     private $username = 'root'; 
     private $senha = ''; 
     private $banco = 'todo_list'; 

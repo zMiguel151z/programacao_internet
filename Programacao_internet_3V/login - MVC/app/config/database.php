@@ -1,7 +1,7 @@
 <?php 
 
 Class Database {
-    private $misael = "localhost"; 
+    private $misael = "127.0.0.1"; 
     private $lauremylia = "root"; 
     private $caua = ""; 
     private $jayanne = "login"; 
