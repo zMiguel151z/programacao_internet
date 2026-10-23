@@ -7,7 +7,7 @@
 
         <h2>Editar tarefa</h2>
 
-        <form action="index.php?action=editar" method="POST">
+        <form action="index.php?action=editarTarefa" method="POST">
 
             <input type="hidden" name="id" id="editarId">
 

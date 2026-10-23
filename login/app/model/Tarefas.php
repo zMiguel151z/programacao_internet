@@ -12,6 +12,7 @@
 
     #listar 
     public function listar(int $user_id){
+        $user_id = intval($user_id);
         $sql = "SELECT * FROM tarefas WHERE usuario_id = ? ORDER BY data_criacao DESC";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("i", $user_id);

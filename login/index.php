@@ -10,28 +10,43 @@ $tarefaController = new TarefaController();
 
 $action = $_GET['action'] ?? 'index';
 switch($action){
-    case 'autenticar':
+    case 'autenticarUsuario':
         $userController->autenticar();
         break;
+    case 'cadastrarUsuario':
+         include __DIR__ . '/app/view/cadastro.php';
+        break;
+        
+    case 'criarUsuario':
+        $userController->criar();
+        break;
+        
+    case 'atualizarUsuario':
+        $userController->atualizar();
+        break;
+        
+    case 'deletarUsuario':
+        $userController->deletar();
+        break;
 
-    case 'painel':
+    case 'painelUsuario':
         $userController->painel();
         $tarefaController->index();
         break;
 
-    case 'logout':
+    case 'logoutUsuario':
         $userController->logout();
         break;
 
-    case 'criar':
+    case 'criarTarefa':
         $tarefaController->criar();
         break;
 
-    case 'excluir':
+    case 'excluirTarefa':
         $tarefaController->deletar();
         break;
 
-    case 'editar':
+    case 'editarTarefa':
         $tarefaController->atualizar();
         break;
 
@@ -39,5 +54,13 @@ switch($action){
         $userController->index();
         break;
 }
+?>
 
+<script>
+    function mostrarMensagem(texto) {
+        alert(texto);
+    }
 
+    mostrarMensagem(<?= json_encode($_SESSION['erro']) ?>;);
+    
+</script>

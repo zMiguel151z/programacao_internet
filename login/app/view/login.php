@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Login MVC</title>
 
-    <link rel="stylesheet" href="/app/view/style/loginStyle.css">
+    <link rel="stylesheet" href="/app/view/style/autenticacaoStyle.css">
 </head>
 <body>
 <div>
@@ -17,7 +17,7 @@
         </p>
     <?php endif; ?>
 
-    <form action="index.php?action=autenticar" method="POST">
+    <form action="/../index.php?action=autenticarUsuario" method="POST">
         <p class="input">
             <label>E-mail</label>
             <input type="email" name="email">
@@ -30,6 +30,7 @@
 
         <p>
             <button type="submit">Entrar</button>
+            <a href="/index.php?action=cadastrarUsuario">Criar</a>
         </p>
     </form>
 

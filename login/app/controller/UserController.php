@@ -11,8 +11,8 @@ Class UserController{
     }
 
     public function index(){
-        if(isset($_SESSION['id'])){
-            header("Location: index.php?action=painel");
+        if(isset($_SESSION['id_usuario'])){
+            header("Location: index.php?action=painelUsuario");
             exit;
         }
         include __DIR__ . "/../view/login.php"; 
@@ -30,26 +30,100 @@ Class UserController{
         if(empty($email) || empty($senha)){
             $erro = "Preencha seu email e senha";
             include __DIR__ . "/../view/login.php";
+            return;
         }
 
         $usuario = $this->usuarioModel->buscarPorEmail($email);
 
         if($usuario && password_verify($senha, $usuario['senha'])){
             session_regenerate_id(true);
-            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['id_usuario'] = $usuario['id'];
             $_SESSION['nome'] = $usuario['nome'];
+            $_SESSION['email'] = $usuario['email'];
 
-            header("Location: index.php?action=painel" );
+            header("Location: index.php?action=painelUsuario" );
             exit;
         }
 
         $erro = "E-mail ou senha estão incorretos";
         include __DIR__ . '/../view/login.php';
+        return;
 
     }
 
+    public function param_existe($var) {
+        return trim($var ?? '') !== '';
+    }
+    
+    public function criar() {
+        $nome  = trim($_POST["nome"]  ?? '');
+        $email = trim($_POST["email"] ?? '');
+        $senha = $_POST["senha"] ?? '';
+    
+        if (!self::param_existe($nome) || !self::param_existe($email) || !self::param_existe($senha)) {
+            $erro = "Preencha todos os campos";
+            include __DIR__ . "/../view/cadastro.php";
+            return;
+        }
+    
+        if ($this->usuarioModel->buscarPorEmail($email)) {
+            $erro = "Email já existe";
+            include __DIR__ . "/../view/cadastro.php";
+            return;
+        }
+    
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+        $this->usuarioModel->criar($nome, $email, $senhaHash);
+        header("location: index.php");
+        exit;
+    }
+
+    public function atualizar(){
+        if (!isset($_SESSION['id_usuario'])) {
+            header("Location: index.php");
+            exit;
+        }
+
+        $id    = $_POST["id"] ?? '';
+        $nome  = trim($_POST["nome"]  ?? '');
+        $email = trim($_POST["email"] ?? '');
+        $senha = $_POST["senha"] ?? '';
+
+        if (!self::param_existe($id) || !self::param_existe($nome) || !self::param_existe($email) || !self::param_existe($senha)) {
+            $_SESSION['erro_usuario'] = "Preencha todos os campos";
+            header("Location: index.php?action=painelUsuario");
+            exit;
+        }
+
+        if ((int) $id !== (int) $_SESSION['id_usuario']) {
+            header("Location: index.php?action=painelUsuario");
+            exit;
+        }
+
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+        $this->usuarioModel->atualizar((int) $id, $nome, $email, $senhaHash);
+
+        $_SESSION['nome'] = $nome;
+        $_SESSION['email'] = $email;
+
+        unset($_SESSION['erro_usuario']);
+        header("Location: index.php?action=painelUsuario");
+        exit;
+    }
+
+    public function deletar(){
+        if (!isset($_SESSION['id_usuario'])) {
+            header("Location: index.php");
+            exit;
+        }
+
+        $this->usuarioModel->Deletar($_SESSION['id_usuario']);
+        include __DIR__ . "/../view/login.php";
+        exit;
+    }
+    
     public function painel(){
-        if(!isset($_SESSION['id'])){
+        if(!isset($_SESSION['id_usuario'])){
             header("Location: index.php");
             exit; 
         }
@@ -62,4 +136,7 @@ Class UserController{
         header("Location: index.php");
         exit;
     }
+
+    
+    
 }

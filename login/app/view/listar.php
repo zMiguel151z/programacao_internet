@@ -3,10 +3,10 @@
 
 <div class="painel_lista">
     <div class="head_lista">
-        <h1>TO-DO List (MVC)</h1>
+        <h1>TO-DO List</h1>
 
-        <form action="index.php?action=criar" method="POST">
-            <input type="text" name="descricao" placeholder="Descrição da tarefa">
+        <form id="descricao" action="index.php?action=criarTarefa" method="POST">
+            <input  type="text" name="descricao" placeholder="Descrição da tarefa">
             <button type="submit">Adicionar</button>
         </form>
     </div>
@@ -18,9 +18,12 @@
                     <li class="tarefas" id="tarefa-<?php echo (int)$tarefa['id']; ?>">
                         <span><?php echo htmlspecialchars($tarefa['descricao']); ?></span>
             
-                        <a href="index.php?action=excluir&id=<?php echo (int)$tarefa['id']; ?>">Excluir</a>
+                        <a href="index.php?action=excluirTarefa&id=<?php echo (int)$tarefa['id']; ?>">Excluir</a>
             
-                        <button onclick='abrirModal(<?php echo (int)$tarefa["id"]; ?>, <?php echo json_encode($tarefa["descricao"]); ?>)'>
+                        <button onclick='abrirModal(
+                          <?php echo (int)$tarefa["id"]; ?>,
+                          <?php echo json_encode($tarefa["descricao"]); ?>)
+                        '>
                             Editar
                         </button>
                     </li>
