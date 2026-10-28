@@ -35,15 +35,7 @@ Class UserController{
 
         $usuario = $this->usuarioModel->buscarPorEmail($email);
 
-        if($usuario && password_verify($senha, $usuario['senha'])){
-            session_regenerate_id(true);
-            $_SESSION['id_usuario'] = $usuario['id'];
-            $_SESSION['nome'] = $usuario['nome'];
-            $_SESSION['email'] = $usuario['email'];
-
-            header("Location: index.php?action=painelUsuario" );
-            exit;
-        }
+        
 
         $erro = "E-mail ou senha estão incorretos";
         include __DIR__ . '/../view/login.php';
@@ -133,6 +125,7 @@ Class UserController{
     public function logout(){
         session_destroy(); 
 
+        
         header("Location: index.php");
         exit;
     }

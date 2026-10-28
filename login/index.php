@@ -39,6 +39,7 @@ switch($action){
         break;
 
     case 'criarTarefa':
+       
         $tarefaController->criar();
         break;
 

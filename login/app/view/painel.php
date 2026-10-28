@@ -39,7 +39,12 @@
     
     <?php include __DIR__ . '/deletarModal.php'; ?>
 
+    
+
     <script>
+
+        
+
         function abrirModalUsuario(botao) {
 
             document.getElementById("editarUsuarioId").value = botao.dataset.id;
