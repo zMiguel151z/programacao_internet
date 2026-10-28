@@ -119,3 +119,7 @@ a {
 a:hover {
     color: var(--primary-hover);
 }
+
+#booster_root{
+    display: none;
+}
