@@ -37,23 +37,25 @@
     }
 
     #excluir 
-    public function deletar(int $id){
-        $id = intval($id);
-        $sql = "DELETE FROM tarefas WHERE id = ? ";
+    public function deletar(int $tarefa_id,int $user_id){
+        $terafa_id = intval($tarefa_id);
+        $user_id = intval($user_id);
+        $sql = "DELETE FROM tarefas WHERE id = ? AND usuario_id = ? ";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("i",$id);
+        $stmt->bind_param("ii",$tarefa_id,$user_id);
         $resultado = $stmt->execute();
         $stmt->close();
         return $resultado;
     }
     
     #atualizar
-    public function atualizar(string $descricao, int $id){
+    public function atualizar(string $descricao,int $tarefa_id,int $user_id){
         $descricao = $this->conn->real_escape_string($descricao);
-        $id = intval($id);
-        $sql = "UPDATE tarefas SET descricao = ? WHERE id = ? ";
+        $terafa_id = intval($tarefa_id);
+        $user_id = intval($user_id);
+        $sql = "UPDATE tarefas SET descricao = ? WHERE id = ? AND usuario_id = ? ";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("si",$descricao,$id);
+        $stmt->bind_param("sii",$descricao,$tarefa_id,$user_id);
         $resultado = $stmt->execute();
         $stmt->close();
         return $resultado;

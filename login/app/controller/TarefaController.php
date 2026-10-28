@@ -22,15 +22,15 @@ class TarefaController{
     }
 
     public function deletar(){
-        if(isset($_GET['id'])){
-            $this->tarefaModel->deletar($_GET['id']);
+        if(isset($_GET['id']) && isset($_SESSION['id_usuario'])){
+            $this->tarefaModel->deletar($_GET['id'],$_SESSION['id_usuario']);
         }
         header("Location: index.php?action=painelUsuario");
     }
 
     public function atualizar(){
-         if(isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
-            $this->tarefaModel->atualizar($_POST['descricao'],$_POST['id']);
+         if(isset($_POST['id']) && isset($_SESSION['id_usuario']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+            $this->tarefaModel->atualizar($_POST['descricao'],$_POST['id'],$_SESSION['id_usuario']);
          }
          header("Location: index.php?action=painelUsuario");
     }

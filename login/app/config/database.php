@@ -4,7 +4,7 @@ Class Database {
     private $host = "127.0.0.1";
     private $user = "root";
     private $senha = "";
-    private $banco = "login";
+    private $banco = "banco_tarefas";
 
     public mysqli $conn;
 
